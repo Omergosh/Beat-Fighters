@@ -12,12 +12,14 @@ public class BeatTrackerScript : MonoBehaviour {
     void Start () {
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
         conductorScript = conductor.GetComponent<ConductorScript>();
+        transform.Rotate(Vector3.forward, conductorScript.offset * 360);
     }
 	
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(conductorScript.nextBeatTime);
         //Debug.Log(conductorScript.songPosition % conductorScript.crotchet);
-        transform.Rotate(Vector3.forward, (conductorScript.songPosition % conductorScript.crotchet)/* - transform.rotation.z)*/ * -360 * Time.deltaTime);
+        float rotationSpeed = (Time.deltaTime / (conductorScript.crotchet)) * -360;
+        transform.Rotate(Vector3.forward, rotationSpeed);
 	}
 }
