@@ -10,6 +10,10 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject player1;
     public GameObject player2;
 
+    // Beat track used to keep track of attacking notes and defending notes
+    public int[] attackBeatTrack = new int[4];
+    public int[] defenseBeatTrack = new int[4];
+
     // Use this for initialization
     void Start () {
 		
