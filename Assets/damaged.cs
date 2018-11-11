@@ -11,12 +11,12 @@ public class damaged : MonoBehaviour {
     public Slider p2_Slider;
     private bool isDamaged;
     private float hitStun;
-    p2_HP p2_HP;
+    player_HP player_HP;
 
 
 	// Use this for initialization
 	void Start () {
-        p2_HP = GetComponent<p2_HP>();
+        player_HP = GetComponent<player_HP>();
 	}
 	
 	// Update is called once per frame
@@ -25,7 +25,7 @@ public class damaged : MonoBehaviour {
         {
             isDamaged = true;
             P2_spriteImage.sprite = damagedSprite;
-            p2_HP.TakeDamage();
+            player_HP.TakeDamage();
         }
 
         if (this.isDamaged)
