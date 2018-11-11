@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class p1_Shoot : MonoBehaviour {
+    public GameObject conductor;
     public GameObject bullet;
     private Transform firePos;
 
@@ -14,7 +15,7 @@ public class p1_Shoot : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-		if (Input.GetKeyDown("a"))
+		if (Input.GetKeyDown("a") || conductor.GetComponent<ConductorScript>().newBeatThisFrame)
         {
             Fire();
         }

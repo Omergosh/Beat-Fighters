@@ -24,13 +24,15 @@ public class ConductorScript : MonoBehaviour {
     // Useful indicators for where we are in the song
     public int beatnumber = 0;
     public int barnumber = 0; // Not applicable yet
+    public bool newBeatThisFrame = false; // Has the track progressed to a new beat this frame?
+    public bool newBarThisFrame = false; // Has the track progressed to a new bar this frame? AKA in this case did the track just loop 
 
     // Other objects/variables
     AudioSource audio;
 
     // Use this for initialization
     void Start () {
-        crotchet = 120f / bpm;
+        crotchet = 60f / bpm;
         beatsperbar = 4;
 
         audio = GetComponent<AudioSource>();
@@ -43,6 +45,8 @@ public class ConductorScript : MonoBehaviour {
 	void Update () {
         // Keep track of position in song
         songposition = (float)(audio.time) * audio.pitch - offset;
+        newBeatThisFrame = false;
+        newBarThisFrame = false;
         //Debug.Log(audio.time);
 
         // If new beat has been reached this frame
@@ -50,11 +54,13 @@ public class ConductorScript : MonoBehaviour {
         {
             // Change beat to new value first
             beatnumber = (int)(songposition / crotchet);
+            newBeatThisFrame = true; // VERY IMPORTANT for other GameObjects to use for triggers
 
             //If applicable, change current barnumber too
             if (beatnumber == 0)
             {
                 barnumber++;
+                newBarThisFrame = true;
             }
 
             // Do something you want to happen each beat!
