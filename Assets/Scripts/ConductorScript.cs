@@ -77,7 +77,7 @@ public class ConductorScript : MonoBehaviour {
 
             // Do something you want to happen each beat!
             // In this case, we'll go with a Debug.Log() which is basically a print() or printf() statement
-            Debug.Log(beatNumber);
+            //Debug.Log(beatNumber);
             //Debug.Log("UNS");
         }
 
@@ -89,7 +89,7 @@ public class ConductorScript : MonoBehaviour {
             if (beatCheck[0] == 1)
             {
                 // Test code goes here
-                Debug.Log("UNS" + beatCheck[1].ToString());
+                //Debug.Log("UNS" + beatCheck[1].ToString());
             }
         }
     }
