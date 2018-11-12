@@ -11,16 +11,16 @@ public class player_HP : MonoBehaviour {
     public Sprite damagedSprite;
     public Sprite normalSprite;
     public Sprite deadSprite;
+    public Sprite victorySprite;
 
-    p2_Shoot p2_Shoot;
-    bool isDead;
+    public bool isDead;
     private float hitStun = 0;
+    bool hit;
 
 
     // Use this for initialization
     void Start ()
     {
-        p2_Shoot = GetComponent<p2_Shoot>();
         currentHealth = startingHealth;
         player_spriteImage.sprite = normalSprite;
 	}
@@ -28,36 +28,34 @@ public class player_HP : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown("b"))
         {
-                player_spriteImage.sprite = damagedSprite;
-                TakeDamage();
+            Debug.Log("HIT");
+            TakeDamage();
+        }
+        if (hit)
+        {
+            this.hitStun += Time.deltaTime;
+
+            if (this.hitStun >= 2f && !isDead)
+            {
+                this.hitStun = 0f;
+                player_spriteImage.sprite = normalSprite;
+                hit = false;
+            }
         }
 
-       this.hitStun += Time.deltaTime;
-
-        if (this.hitStun >= 2f && !isDead)
-        {
-            this.hitStun = 0f;
-            player_spriteImage.sprite = normalSprite;
-        }
     }   
 
     public void TakeDamage ()
     {
         currentHealth -= 1;
         healthSlider.value = currentHealth;
+        player_spriteImage.sprite = damagedSprite;
+        hit = true;
         if(currentHealth <= 0 && !isDead)
         {
-            Death();
+            isDead = true;
         }
-    }
-
-    public void Death()
-    {
-        isDead = true;
-        p2_Shoot.enabled = false;
-        player_spriteImage.sprite = deadSprite;
-        this.enabled = false;
     }
 }

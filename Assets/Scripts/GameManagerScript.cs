@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Linq;
 
-public class GameManagerScript : MonoBehaviour {
+public class GameManagerScript : MonoBehaviour
+{
 
     // References to GameObjects in scene
     public GameObject camera;
@@ -11,15 +14,17 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject player2;
     public ConductorScript conductorScript;
     public Text phasesText;
+    public player_HP p1_HP;
+    public player_HP p2_HP;
 
-    int Phase; //4 phases
-    bool Turn; //Player 1 is true, Player 2 is false
-    string Player;
+    public int Phase; //4 phases
+    public bool Turn; //Player 1 is true, Player 2 is false
 
     // Beat track used to keep track of attacking notes and defending notes
-    public int[] attackBeatTrack = new int[4];
-    public int[] defenseBeatTrack = new int[4];
+    public int[] attackBeatTrack = new int[4] { 0, 0, 0, 0 };
+    public int[] defenseBeatTrack = new int[4] { 0, 0, 0, 0 };
 
+   
     // Use this for initialization
     void Start () {
         Phase = -1;
@@ -27,7 +32,7 @@ public class GameManagerScript : MonoBehaviour {
         togglePlayer(player1, false);
         togglePlayer(player2, false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         if (conductorScript.newBarThisFrame)
@@ -77,9 +82,59 @@ public class GameManagerScript : MonoBehaviour {
             if (Phase == 4)
             {
                 //Results phase
-                Turn = !Turn;
-                Phase = 1;
                 phasesText.text = "Results";
+                Debug.Log("Results");
+
+                Debug.Log(attackBeatTrack[0].ToString() + " ATT 0");
+                Debug.Log(attackBeatTrack[1].ToString() + " ATT 1");
+                Debug.Log(attackBeatTrack[2].ToString() + " ATT 2");
+                Debug.Log(attackBeatTrack[3].ToString() + " ATT 3");
+
+                Debug.Log(defenseBeatTrack[0].ToString() + " DEF 0");
+                Debug.Log(defenseBeatTrack[1].ToString() + " DEF 1");
+                Debug.Log(defenseBeatTrack[2].ToString() + " DEF 2");
+                Debug.Log(defenseBeatTrack[3].ToString() + " DEF 3");
+
+                Debug.Log(defenseBeatTrack.SequenceEqual(attackBeatTrack));
+                if (Turn)
+                {
+                    if (!(attackBeatTrack.SequenceEqual(defenseBeatTrack)))
+                    {
+                        p2_HP.TakeDamage();
+                    }
+                }
+                else
+                {
+                    if (!(attackBeatTrack.SequenceEqual(defenseBeatTrack)))
+                    {
+                        p1_HP.TakeDamage();
+                    }
+                }
+                if (p1_HP.isDead)
+                {
+                    togglePlayer(player1, false);
+                    togglePlayer(player2, false);
+                    p1_HP.player_spriteImage.sprite = p1_HP.deadSprite;
+                    p2_HP.player_spriteImage.sprite = p2_HP.victorySprite;
+                    phasesText.text = "Player 2 Victory!";
+                    Phase = 5;
+                }
+                else if (p2_HP.isDead)
+                {
+                    togglePlayer(player1, false);
+                    togglePlayer(player2, false);
+                    p1_HP.player_spriteImage.sprite = p1_HP.victorySprite;
+                    p2_HP.player_spriteImage.sprite = p2_HP.deadSprite;
+                    phasesText.text = "Player 1 Victory!";
+                    Phase = 5;
+                }
+                else
+                {
+                    Turn = !Turn;
+                    Phase = 0;
+                    attackBeatTrack = new int[4] { 0, 0, 0, 0 };
+                    defenseBeatTrack = new int[4] { 0, 0, 0, 0 };
+                }
             }
         }
 	}

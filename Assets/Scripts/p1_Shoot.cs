@@ -9,6 +9,8 @@ public class p1_Shoot : MonoBehaviour {
     public ConductorScript conductorScript;
     public GameObject bullet;
     private Transform firePos;
+    bool cooldown;
+    int[] hitMiss;
 
     private void Start()
     {
@@ -20,15 +22,30 @@ public class p1_Shoot : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-		if (Input.GetKeyDown("a")) // || conductorScript.newBeatThisFrame
+        if (conductorScript.newBeatThisFrame)
         {
-            Fire();
+            cooldown = false;      
         }
 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("a") && !cooldown)
         {
-            gameManagerScript.attackBeatTrack[conductorScript.beatNumber] = 1;
+            Fire();
+            hitMiss = conductorScript.BeatCheck();
+            if (hitMiss[0] == 1)
+            {
+                if (gameManagerScript.Turn)
+                {
+                    gameManagerScript.attackBeatTrack[hitMiss[1]] = 1;
+                }
+                else
+                {
+                    gameManagerScript.defenseBeatTrack[hitMiss[1]] = 1;
+                }
+            }
+            cooldown = true;
         }
+        
+
         if (Input.GetKeyDown("s"))
         {
             gameManagerScript.attackBeatTrack[conductorScript.beatNumber] = 0;

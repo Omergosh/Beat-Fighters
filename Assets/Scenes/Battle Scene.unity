@@ -205,7 +205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -95, y: 0}
+  m_AnchoredPosition: {x: -200, y: -30}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &205437162
@@ -779,6 +779,16 @@ Prefab:
       propertyPath: m_Name
       value: P1
       objectReference: {fileID: 0}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: gameManagerScript
+      value: 
+      objectReference: {fileID: 1078306025}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: conductorScript
+      value: 
+      objectReference: {fileID: 847773555}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa989fdfd83ad8947aa04ff5e4b659f6, type: 2}
   m_IsPrefabAsset: 0
@@ -805,8 +815,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1078306023}
   conductor: {fileID: 847773554}
-  gameManagerScript: {fileID: 0}
-  conductorScript: {fileID: 0}
+  gameManagerScript: {fileID: 1078306025}
+  conductorScript: {fileID: 847773555}
   bullet: {fileID: 1467701713901534, guid: 370b1a86307483a499ae0adbe7e0003c, type: 2}
 --- !u!4 &997820152 stripped
 Transform:
@@ -828,9 +838,11 @@ MonoBehaviour:
   currentHealth: 0
   healthSlider: {fileID: 205437162}
   player_spriteImage: {fileID: 1601617919}
-  damagedSprite: {fileID: 21300000, guid: 5bb454c5572be38419774d7da9745239, type: 3}
+  damagedSprite: {fileID: 21300000, guid: d58314ac487e01047bd929e99d987f36, type: 3}
   normalSprite: {fileID: 21300000, guid: cbdb4efaa8d6e534f9d26f883798dc7b, type: 3}
   deadSprite: {fileID: 21300000, guid: e0f1a10f0c7774b4d9e9a0764d1b2cfd, type: 3}
+  victorySprite: {fileID: 21300000, guid: 0531675dc8afc534bb2af2c2a4dde8f2, type: 3}
+  isDead: 0
 --- !u!1 &998136618
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +979,10 @@ MonoBehaviour:
   player2: {fileID: 997820150}
   conductorScript: {fileID: 847773555}
   phasesText: {fileID: 1591908777}
+  p1_HP: {fileID: 1133014877}
+  p2_HP: {fileID: 997820153}
+  Phase: 0
+  Turn: 0
   attackBeatTrack: 00000000000000000000000000000000
   defenseBeatTrack: 00000000000000000000000000000000
 --- !u!1 &1133014876 stripped
@@ -992,6 +1008,8 @@ MonoBehaviour:
   damagedSprite: {fileID: 21300000, guid: cb95d036a255c4f47b088a557b922a89, type: 3}
   normalSprite: {fileID: 21300000, guid: 2050077b3c9e59c41b864652ad912e3f, type: 3}
   deadSprite: {fileID: 21300000, guid: a55a85e0e81821b46b9c7f4c454abd71, type: 3}
+  victorySprite: {fileID: 21300000, guid: f152ab4ed49dc43419b50d064c7bb29c, type: 3}
+  isDead: 0
 --- !u!1 &1198544549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,14 +1310,14 @@ RectTransform:
   m_GameObject: {fileID: 1601617917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1778164340}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601617919
@@ -1860,14 +1878,14 @@ RectTransform:
   m_GameObject: {fileID: 2060599665}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -10, y: 10, z: 1}
+  m_LocalScale: {x: -6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1530179086}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060599667
@@ -1937,7 +1955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95, y: 0}
+  m_AnchoredPosition: {x: 200, y: -30}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2122715466
