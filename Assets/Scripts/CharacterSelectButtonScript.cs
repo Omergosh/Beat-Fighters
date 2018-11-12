@@ -9,6 +9,7 @@ public class CharacterSelectButtonScript : MonoBehaviour
     public CharacterSelectManagerScript characterSelectManagerScript;
     public int player;
     public string characterToSelect = "Squriby";
+    public AudioSource buttonSound;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class CharacterSelectButtonScript : MonoBehaviour
 
     public void selectCharacter()
     {
+        buttonSound.Play();
         if (player == 1)
         {
             characterSelectManagerScript.selectedCharacter1 = characterToSelect;

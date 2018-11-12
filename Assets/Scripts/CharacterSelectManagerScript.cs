@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class CharacterSelectManagerScript : MonoBehaviour
 {
 
-    public static CharacterSelectManagerScript instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+    public static CharacterSelectManagerScript instance = null;
+        //Static instance of CharacterSelectManager which allows it to be accessed by any other script.
     public string selectedCharacter1 = "";
     public string selectedCharacter2 = "";
 
@@ -38,8 +39,6 @@ public class CharacterSelectManagerScript : MonoBehaviour
         Debug.Log(selectedCharacter2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-
 
     //Update is called every frame.
     void Update()
