@@ -44,9 +44,9 @@ public class CharacterSelectManagerScript : MonoBehaviour
     //Update is called every frame.
     void Update()
     {
-        if (selectedCharacter1 != null && selectedCharacter2 != null)
+        if (selectedCharacter1 != "" && selectedCharacter2 != "")
         {
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 StartGame();
             }
