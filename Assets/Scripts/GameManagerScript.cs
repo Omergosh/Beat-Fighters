@@ -33,14 +33,14 @@ public class GameManagerScript : MonoBehaviour {
         if (conductorScript.newBarThisFrame)
         { 
             Phase += 1;
-            if (Phase == 1)
+            togglePlayer(player1, false);
+            togglePlayer(player2, false);
+            if (Phase == 0)
             {
                 //Listening phase for attacker
-                togglePlayer(player1, false);
-                togglePlayer(player2, false);
                 phasesText.text = "Hey! Listen! Get ready to attack!";
             }
-            if (Phase == 2)
+            if (Phase == 1)
             {
                 //Attack phase
                 togglePlayer(player1, Turn);
@@ -55,14 +55,12 @@ public class GameManagerScript : MonoBehaviour {
                 }
 
             }
-            if (Phase == 3)
+            if (Phase == 2)
             {
                 //Listening phase for defender
-                togglePlayer(player1, false);
-                togglePlayer(player2, false);
                 phasesText.text = "Hey! Listen! Get ready to defend!";
             }
-            if (Phase == 4)
+            if (Phase == 3)
             {
                 //Defence phase
                 togglePlayer(player1, !Turn);
@@ -75,8 +73,13 @@ public class GameManagerScript : MonoBehaviour {
                 {
                     phasesText.text = "Player 1 defend!";
                 }
+            }
+            if (Phase == 4)
+            {
+                //Results phase
                 Turn = !Turn;
-                Phase = 0;
+                Phase = 1;
+                phasesText.text = "Results";
             }
         }
 	}

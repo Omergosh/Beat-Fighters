@@ -102,19 +102,19 @@ public class ConductorScript : MonoBehaviour {
         //  which beat the button press would correspond to if valid (0-3)]
         int[] checkReturn = new int[2];
 
-        if(previousBeatTime <= beatLeeway || nextBeatTime <= beatLeeway)
+        if (previousBeatTime <= beatLeeway || nextBeatTime <= beatLeeway)
         {
             checkReturn[0] = 1;
-
-            if (nextBeatTime <= previousBeatTime)
-            {
-                checkReturn[1] = (beatNumber + 1) % beatsPerBar;
-            }
-            else
-            {
-                checkReturn[1] = beatNumber % beatsPerBar;
-            }
         }
+        if (nextBeatTime <= previousBeatTime)
+        {
+            checkReturn[1] = (beatNumber + 1) % beatsPerBar;
+        }
+        else
+        {
+            checkReturn[1] = beatNumber % beatsPerBar;
+        }
+        
 
         return checkReturn;
     }
