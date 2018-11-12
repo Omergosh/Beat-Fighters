@@ -13,6 +13,7 @@ public class BeatTrackerScript : MonoBehaviour {
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
         conductorScript = conductor.GetComponent<ConductorScript>();
         transform.Rotate(Vector3.forward, conductorScript.offset * 360);
+        transform.Rotate(Vector3.forward, -90);
     }
 	
 	// Update is called once per frame
