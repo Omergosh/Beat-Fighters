@@ -14,8 +14,10 @@ public class GameManagerScript : MonoBehaviour
     public GameObject player2;
     public ConductorScript conductorScript;
     public Text phasesText;
+    public Text beatText;
     public player_HP p1_HP;
     public player_HP p2_HP;
+
 
     public int Phase; //4 phases
     public bool Turn; //Player 1 is true, Player 2 is false
@@ -24,19 +26,25 @@ public class GameManagerScript : MonoBehaviour
     public int[] attackBeatTrack = new int[4] { 0, 0, 0, 0 };
     public int[] defenseBeatTrack = new int[4] { 0, 0, 0, 0 };
 
-   
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         Phase = -1;
         Turn = true;
         togglePlayer(player1, false);
         togglePlayer(player2, false);
-	}
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
+        if (conductorScript.newBeatThisFrame)
+        {
+            beatText.text = (conductorScript.beatNumber + 1).ToString();
+        }
         if (conductorScript.newBarThisFrame)
-        { 
+        {
             Phase += 1;
             togglePlayer(player1, false);
             togglePlayer(player2, false);
@@ -53,10 +61,12 @@ public class GameManagerScript : MonoBehaviour
                 if (Turn)
                 {
                     phasesText.text = "Player 1 attack!";
+                    //beatText.Tranform.Translate = new Vector3(-130f, 0f, 0f);
                 }
                 else
                 {
                     phasesText.text = "Player 2 attack!";
+                    //beatText.Transform.Translate = new Vector3(130f, 0f, 0f);
                 }
 
             }
@@ -64,26 +74,49 @@ public class GameManagerScript : MonoBehaviour
             {
                 //Listening phase for defender
                 phasesText.text = "Hey! Listen! Get ready to defend!";
+
+                /*
+                if (Turn)
+                {
+                    beatText.Transform.Translate = new Vector3(130f, 0f, 0f);
+                }
+                else
+                {
+                    beatText.Transform.Translate = new Vector3(-130f, 0f, 0f);
+                } 
+                */
             }
             if (Phase == 3)
             {
                 //Defence phase
                 togglePlayer(player1, !Turn);
                 togglePlayer(player2, Turn);
-                if  (Turn)
+                if (Turn)
                 {
                     phasesText.text = "Player 2 defend!";
+                    //beatText.Transform.Translate = new Vector3(130f, 0f, 0f);
                 }
                 else
                 {
                     phasesText.text = "Player 1 defend!";
+                    //beatText.Transform.Translate = new Vector3(-130f, 0f, 0f);
                 }
             }
             if (Phase == 4)
             {
                 //Results phase
                 phasesText.text = "Results";
-                Debug.Log("Results");
+
+                /*
+                if (Turn)
+                {
+                    beatText.Transform.Translate = new Vector3(-130f, 0f, 0f);
+                }
+                else
+                {
+                    beatText.Transform.Translate = new Vector3(130f, 0f, 0f);
+                }
+                */
 
                 Debug.Log(attackBeatTrack[0].ToString() + " ATT 0");
                 Debug.Log(attackBeatTrack[1].ToString() + " ATT 1");
@@ -117,6 +150,7 @@ public class GameManagerScript : MonoBehaviour
                     p1_HP.player_spriteImage.sprite = p1_HP.deadSprite;
                     p2_HP.player_spriteImage.sprite = p2_HP.victorySprite;
                     phasesText.text = "Player 2 Victory!";
+                    beatText.text = "";
                     Phase = 5;
                 }
                 else if (p2_HP.isDead)
@@ -126,6 +160,7 @@ public class GameManagerScript : MonoBehaviour
                     p1_HP.player_spriteImage.sprite = p1_HP.victorySprite;
                     p2_HP.player_spriteImage.sprite = p2_HP.deadSprite;
                     phasesText.text = "Player 1 Victory!";
+                    beatText.text = "";
                     Phase = 5;
                 }
                 else
@@ -137,7 +172,7 @@ public class GameManagerScript : MonoBehaviour
                 }
             }
         }
-	}
+    }
 
     void togglePlayer(GameObject player, bool toggle)
     {
