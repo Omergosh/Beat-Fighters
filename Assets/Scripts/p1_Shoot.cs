@@ -9,14 +9,18 @@ public class p1_Shoot : MonoBehaviour {
     public ConductorScript conductorScript;
     public GameObject bullet;
     private Transform firePos;
+    public AudioSource sound;
     bool cooldown;
     int[] hitMiss;
+    public AudioClip[] fireSound;
+
 
     private void Start()
     {
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
         conductorScript = conductor.GetComponent<ConductorScript>();
         firePos = transform.Find("firePos1");
+        sound = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,10 +33,13 @@ public class p1_Shoot : MonoBehaviour {
 
         if (Input.GetKeyDown("a") && !cooldown)
         {
-            Fire();
             hitMiss = conductorScript.BeatCheck();
             if (hitMiss[0] == 1)
             {
+                Fire();
+                sound.clip = fireSound[hitMiss[1]];
+                sound.Play();
+
                 if (gameManagerScript.Turn)
                 {
                     gameManagerScript.attackBeatTrack[hitMiss[1]] = 1;

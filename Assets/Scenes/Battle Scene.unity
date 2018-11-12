@@ -779,6 +779,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: fireSound.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4578289200758504, guid: aa989fdfd83ad8947aa04ff5e4b659f6, type: 2}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -864,6 +869,26 @@ Prefab:
       propertyPath: conductorScript
       value: 
       objectReference: {fileID: 847773555}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: fireSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 952f80d40105b704a97f4b78146dfa47, type: 3}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: fireSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a7b261b0a621f84195d72f53cc2f1cc, type: 3}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: fireSound.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 307502fc5da0f4244b77294d0e38508c, type: 3}
+    - target: {fileID: 114356686683473050, guid: aa989fdfd83ad8947aa04ff5e4b659f6,
+        type: 2}
+      propertyPath: fireSound.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bcab6861d92451459310553ad114496, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa989fdfd83ad8947aa04ff5e4b659f6, type: 2}
   m_IsPrefabAsset: 0
