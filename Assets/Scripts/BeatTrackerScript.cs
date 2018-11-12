@@ -20,6 +20,11 @@ public class BeatTrackerScript : MonoBehaviour {
         //Debug.Log(conductorScript.nextBeatTime);
         //Debug.Log(conductorScript.songPosition % conductorScript.crotchet);
         float rotationSpeed = (Time.deltaTime / (conductorScript.crotchet)) * -360;
+        Debug.Log(Input.GetAxis("Vertical"));
+        //if(Input.GetAxis("Vertical") == 180 || Input.GetAxis("Vertical") == 0)
+       // {
+           // rotationSpeed = -rotationSpeed;
+       // }
         transform.Rotate(Vector3.forward, rotationSpeed);
 	}
 }
